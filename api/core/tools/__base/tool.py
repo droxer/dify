@@ -20,18 +20,13 @@ class Tool(ABC):
     The base class of a tool
     """
 
-    entity: ToolEntity
-    runtime: ToolRuntime
-
     def __init__(self, entity: ToolEntity, runtime: ToolRuntime) -> None:
         self.entity = entity
         self.runtime = runtime
 
     def fork_tool_runtime(self, runtime: ToolRuntime) -> "Tool":
         """
-        fork a new tool with meta data
-
-        :param meta: the meta data of a tool call processing, tenant_id is required
+        fork a new tool with metadata
         :return: the new tool
         """
         return self.__class__(
@@ -206,6 +201,7 @@ class Tool(ABC):
         create a blob message
 
         :param blob: the blob
+        :param meta: the meta info of blob object
         :return: the blob message
         """
         return ToolInvokeMessage(
